@@ -1,0 +1,36 @@
+{
+  "name": "Moj proračun",
+  "version": "UX 20261108-v18b over data 0.17.1",
+  "url": "https://moj-proracun-delta.vercel.app/",
+  "deployment": "dpl_5jFp8bHYyBvq2ASgQ46rxdguSxFn",
+  "deployment_state": "READY",
+  "app_source_commit": "5b80dbbe4488903297c45a3ca7165a647ee4a682",
+  "build_commit": "0e3ca448611486e7215029bb927667896e7a63f3",
+  "features": [
+    "Search-only ZET alias and word-prefix matching remove unrelated substring hits",
+    "Explicit initial plan/rebalance/year labels",
+    "Responsive label rows do not overlap financial amounts"
+  ],
+  "checks": {
+    "checks": [
+      "ZET acronym finds main tram activity first without unrelated substring results",
+      "diacritic/stem search and empty-result reset work; totals unchanged",
+      "specific comparison labels fit mobile and desktop without overlapping amounts",
+      "ZET detail retains exact original financial change"
+    ],
+    "errors": [],
+    "bad_responses": [],
+    "labels": [
+      "Početni plan 2026.",
+      "I. rebalans 2026."
+    ],
+    "passed": true
+  },
+  "data_unchanged": {
+    "A_backend_unchanged": 3,
+    "B_backend_unchanged": 2,
+    "A_voice_code_unchanged": true,
+    "C_exact_financial_json_files_unchanged": 116
+  },
+  "verified_at": "2026-11-08T15:06:31.523373+00:00"
+}
