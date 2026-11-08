@@ -218,3 +218,6 @@
 
 #delta-app.simple-shell .story-related{display:grid;gap:4px;margin-top:12px;border-top:1px solid var(--line);padding-top:8px}
 #delta-app.simple-shell .story-related button{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;text-align:left;min-height:40px;font-size:14px;line-height:1.4}
+
+/* Explicit comparison versions. */
+#summary-from-label,#summary-to-label{font-size:12px;line-height:1.35;display:block;min-height:33px}

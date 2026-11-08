@@ -101,8 +101,11 @@ function card(a){
 
 function matchesSearch(a,text){
  let hay=searchTextCache.get(a);if(!hay){hay=fold([friendlyTitle(a),a.name,a.originalName,a.beforeName,a.organization,a.head,a.program,a.code,...(a.sourceBlocks||[]).flatMap(b=>[b.code,b.head,b.organization,b.program])].join(' '));searchTextCache.set(a,hay);}
- return fold(text).trim().split(/\s+/).every(term=>{
-  if(!term||hay.includes(term))return true;
+ return (fold(text).replace(/\bz\s*\.\s*e\s*\.\s*t\.?/g,'zet').match(/[a-z0-9]+/g)||[]).every(term=>{
+  if(!term)return true;
+   const tokens=hay.match(/[a-z0-9]+/g)||[];
+   if(tokens.some(token=>token===term||(term.length>=3&&token.startsWith(term))))return true;
+   if(term==='zet'&&hay.includes('zagrebacki elektricni tramvaj'))return true;
   const alternatives=/^vrtic/.test(term)?['vrtic','predskol']:/^skol/.test(term)?['skol','osnovnoskol','srednjoskol']:/^knjiznic/.test(term)?['knjiznic']:/^cest/.test(term)?['cest']:/^trznic/.test(term)?['trznic']:/^autobus/.test(term)?['autobus']:[];
   return alternatives.some(t=>new RegExp('\\b'+t).test(hay));
  });
@@ -386,7 +389,7 @@ function chooseComparison({scope=comparisonScope,version=activeVersion.id}={}){
 }
 function renderComparison(){
  const m=data.meta,initial=m.kind==='initial';$('#comparison-summary').hidden=false;$('#comparison-summary').dataset.initial=String(initial);const chosenDate=initial?String(m.year)+'.':dateLabel(m.adoptedAt||activeVersion.date).replace(/\s/g,'');$('#period-current').textContent=m.city+' · '+chosenDate;$('.simple-heading h1').textContent=initial?'Plan za '+m.year+'.':initialMode?'Od početka godine':'Promjene u proračunu';$('.list-head>span:nth-child(2)').textContent=initial?'Planirano':'Početni → odabrani plan';$('.list-head>span:nth-child(3)').textContent=initial?'':'Promjena';
- $('#period-current').parentElement.setAttribute('aria-label','Promijeni godinu ili promjenu proračuna. Trenutačno '+m.year+'. '+dateLabel(m.adoptedAt||activeVersion.date));$('#summary-from-label').textContent='Početni';$('#summary-to-label').textContent=initial?'Planirano':'Odabrani';$('#summary-from-value').innerHTML=initial?'':summaryMoney(m.before);$('#summary-to-value').innerHTML=summaryMoney(m.after);$('#summary-difference-value').innerHTML=initial?'':summaryMoney(m.after-m.before,true);$('#summary-difference-value').className=m.after-m.before>0?'up':m.after-m.before<0?'down':'same';
+ $('#period-current').parentElement.setAttribute('aria-label','Promijeni godinu ili promjenu proračuna. Trenutačno '+m.year+'. '+dateLabel(m.adoptedAt||activeVersion.date));$('#summary-from-label').textContent=(m.initialBaseline?'Početni plan':m.beforeShort||m.beforeLabel||'Početni plan')+' '+m.year+'.';$('#summary-to-label').textContent=(initial?'Početni plan':m.periodShort||activeVersion.ordinal+'. rebalans')+' '+m.year+'.';$('#summary-from-value').innerHTML=initial?'':summaryMoney(m.before);$('#summary-to-value').innerHTML=summaryMoney(m.after);$('#summary-difference-value').innerHTML=initial?'':summaryMoney(m.after-m.before,true);$('#summary-difference-value').className=m.after-m.before>0?'up':m.after-m.before<0?'down':'same';
  renderSummaryVisual();
  $('#comparison-summary').setAttribute('aria-label',m.city+' '+m.year+'. '+(initial?'Plan '+euro(m.after):$('#summary-from-label').textContent+' '+euro(m.before)+', '+$('#summary-to-label').textContent+' '+euro(m.after)+', razlika '+signed(m.after-m.before)));$('#comparison-caption').textContent=m.city+' '+m.year+' '+m.beforeLabel+' → '+m.afterLabel;$('#budget-sort option[value="delta"]').textContent='Prema veličini promjene';
 }
