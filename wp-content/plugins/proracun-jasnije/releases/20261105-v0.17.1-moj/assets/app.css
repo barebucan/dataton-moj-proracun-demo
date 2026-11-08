@@ -225,3 +225,25 @@
 /* Allow version labels to wrap without colliding with amounts. */
 #delta-app.simple-shell .summary-side,#delta-app.simple-shell .summary-difference{grid-template-rows:minmax(34px,auto) auto;row-gap:4px}
 #delta-app.simple-shell #summary-from-label,#delta-app.simple-shell #summary-to-label{font-size:12px;line-height:1.3;min-height:0}
+
+
+/* Complete financial amounts, with one labeled value per row on phones. */
+@media(max-width:840px){
+ .detail-summary{display:grid;grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr);align-items:start;gap:10px}
+ .detail-summary>div:not(.detail-change){min-width:0;width:auto;margin:0;padding:0;border:0}
+ .detail-summary>div:first-child{grid-column:1}
+ .detail-summary>.summary-arrow{grid-column:2;margin-top:22px}
+ .detail-summary>div:nth-of-type(2){grid-column:3}
+ .detail-summary>div>strong{white-space:nowrap;overflow-wrap:normal;word-break:normal;font-size:19px!important}
+ .detail-summary .detail-change{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:7px 12px;width:auto;min-width:0;margin:0;padding:12px 0 0;border-left:0;border-top:1px solid #d6dfce}
+ .detail-summary .detail-change>span{max-width:none;margin:0;font-size:11px;line-height:1.4}
+ .detail-summary .detail-change>small{grid-column:1/-1;font-size:11px;line-height:1.5}
+ #delta-app[data-kind="initial"] .detail-summary>div:nth-of-type(2){grid-column:1/-1}
+}
+@media(max-width:480px){
+ .detail-summary{grid-template-columns:minmax(0,1fr)}
+ .detail-summary>.summary-arrow{display:none}
+ .detail-summary>div:not(.detail-change){grid-column:1!important;display:flex;align-items:center;justify-content:space-between;gap:12px}
+ .detail-summary>div:not(.detail-change)>span{font-size:11px;line-height:1.4;min-width:0}
+ .detail-summary>div:not(.detail-change)>strong{font-size:16px!important;flex:0 0 auto}
+}
