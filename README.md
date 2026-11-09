@@ -7,7 +7,7 @@ Moj proračun građanima, udrugama i novinarima olakšava pronalaženje promjena
 ## Isprobajte
 
 - [Otvori zagrebački rebalans](https://moj-proracun-delta.vercel.app/?grad=zagreb&godina=2025&verzija=zagreb-2025-1)
-- [Paket s videom i uputama](https://github.com/barebucan/dataton-moj-proracun-demo/releases/tag/datathon-predaja)
+- [Paket s videom i uputama](https://github.com/barebucan/dataton-moj-proracun-demo/releases/tag/predaja)
 
 Odaberite grad, godinu i proračunski dokument. Otvorite stavku Zagrebačkog električnog tramvaja i pogledajte promjenu i izvor. **Zanimljivosti** daju kontekst, a **Za mene** izdvaja stavke povezane s odabranom skupinom građana.
 
